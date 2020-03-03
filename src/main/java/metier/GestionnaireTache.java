@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GestionnaireTache {
+public class GestionnaireTache implements GestionnaireTacheInterface {
     private Map<User, List<Tache>> taches = new HashMap<>();
 
     public void addTache(User user, Tache tache){
@@ -20,4 +20,16 @@ public class GestionnaireTache {
         return taches.get(user);
     }
 
+    @Override
+    public void annulerTache(User user, Tache tache) {
+        List<Tache> lst = taches.get(user);
+        lst.get(lst.indexOf(tache)).setStatut(Statut.CANCELED);
+        taches.replace(user,lst);
+
+    }
+
+    @Override
+    public void mettreAJourTache(User user, Tache tache) {
+
+    }
 }
